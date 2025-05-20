@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Birthday Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .form-section {
+            width: 300px;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card img {
+            width: 150px;
+            margin-top: 20px;
+        }
+
+        select, input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2c80b4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-section">
+        <h3>Choose a background color:</h3>
+        <select id="bgColor">
+            <option value="yellow">Yellow</option>
+            <option value="pink">Pink</option>
+            <option value="lightblue">Light Blue</option>
+        </select>
+
+        <h3>Choose a font:</h3>
+        <select id="fontStyle">
+            <option value="Verdana">Verdana</option>
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select>
+
+        <h3>Specify a numeric font size:</h3>
+        <input type="number" id="fontSize" value="25">
+
+        <h3>Choose a border style:</h3>
+        <input type="radio" name="border" value="none" checked> None<br>
+        <input type="radio" name="border" value="double"> Double<br>
+        <input type="radio" name="border" value="solid"> Solid<br>
+
+        <br>
+        <input type="checkbox" id="showImage" checked> Add the Default Picture<br><br>
+
+        <h3>Enter the greeting text below:</h3>
+        <textarea id="message" rows="3">Happy Birthday, and many more</textarea>
+
+        <br><br>
+        <button onclick="updateCard()">Update</button>
+    </div>
+
+    <div id="cardPreview" class="card" style="background-color: yellow; font-family: Verdana; font-size: 25px; border: 2px solid black;">
+        <div id="cardText">Happy Birthday, and many more</div>
+        <img id="cakeImage" src="https://cdn-icons-png.flaticon.com/512/2947/2947035.png" alt="Cake">
+    </div>
+
+    <script>
+        function updateCard() {
+            const card = document.getElementById('cardPreview');
+            const text = document.getElementById('cardText');
+            const bgColor = document.getElementById('bgColor').value;
+            const font = document.getElementById('fontStyle').value;
+            const fontSize = document.getElementById('fontSize').value + 'px';
+            const message = document.getElementById('message').value;
+            const showImage = document.getElementById('showImage').checked;
+            const borderOptions = document.getElementsByName('border');
+            let borderStyle = 'none';
+
+            for (let i = 0; i < borderOptions.length; i++) {
+                if (borderOptions[i].checked) {
+                    borderStyle = borderOptions[i].value;
+                    break;
+                }
+            }
+
+            
+            card.style.backgroundColor = bgColor;
+            card.style.fontFamily = font;
+            card.style.fontSize = fontSize;
+            card.style.border = borderStyle === 'none' ? 'none' : `2px ${borderStyle} black`;
+            text.innerText = message;
+
+            const cakeImage = document.getElementById('cakeImage');
+            cakeImage.style.display = showImage ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+</html>

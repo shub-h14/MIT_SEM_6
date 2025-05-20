@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table and Image Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        #container {
+            position: relative;
+            display: inline-block;
+            transition: transform 2s ease-in-out;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #d6eaf8;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f9ebea;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2e86c1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #21618c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Table and Image Animation</h1>
+
+    <div id="container">
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty</th>
+            </tr>
+            <tr>
+                <td>Apples</td>
+                <td>$3</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Oranges</td>
+                <td>$4</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Bananas</td>
+                <td>$2</td>
+                <td>12</td>
+            </tr>
+        </table>
+
+        <img src="https://wallpapercave.com/wp/wp4187637.jpg" alt="Vacation Image">
+    </div>
+
+    <br>
+
+    <button onclick="moveLeft()">Move Table & Image</button>
+
+    <script>
+        function moveLeft() {
+            const container = document.getElementById('container');
+            container.style.transform = 'translateX(-300px)';
+        }
+    </script>
+
+</body>
+</html>
