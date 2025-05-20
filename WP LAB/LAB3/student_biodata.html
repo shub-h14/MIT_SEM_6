@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Bio-data Form</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        td {
+            padding: 8px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="date"] {
+            width: 100%;
+            padding: 6px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="center">Student Bio-data Form</h2>
+    <form>
+        <table border="1" align="center">
+            <tr>
+                <td><label for="fullname">Full Name:</label></td>
+                <td><input type="text" id="fullname" name="fullname" required /></td>
+            </tr>
+            <tr>
+                <td><label for="dob">Date of Birth:</label></td>
+                <td><input type="date" id="dob" name="dob" required /></td>
+            </tr>
+            <tr>
+                <td><label>Gender:</label></td>
+                <td>
+                    <input type="radio" id="male" name="gender" value="Male" required />
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="Female" />
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="Other" />
+                    <label for="other">Other</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" required /></td>
+            </tr>
+            <tr>
+                <td><label for="phone">Phone Number:</label></td>
+                <td><input type="text" id="phone" name="phone" required /></td>
+            </tr>
+            <tr>
+                <td><label>Courses Interested:</label></td>
+                <td>
+                    <input type="checkbox" id="math" name="courses" value="Mathematics" />
+                    <label for="math">Mathematics</label><br />
+                    <input type="checkbox" id="physics" name="courses" value="Physics" />
+                    <label for="physics">Physics</label><br />
+                    <input type="checkbox" id="chemistry" name="courses" value="Chemistry" />
+                    <label for="chemistry">Chemistry</label><br />
+                    <input type="checkbox" id="cs" name="courses" value="Computer Science" />
+                    <label for="cs">Computer Science</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

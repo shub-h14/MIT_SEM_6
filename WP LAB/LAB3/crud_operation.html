@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee CRUD Operations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      margin-bottom: 20px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #ccc;
+    }
+    form input, form button {
+      padding: 8px;
+      margin: 5px 10px 5px 0;
+      font-size: 1rem;
+    }
+    form input[type="text"], form input[type="number"] {
+      width: 180px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    button.edit-btn, button.delete-btn {
+      cursor: pointer;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+    }
+    button.edit-btn {
+      background-color: #007bff;
+    }
+    button.delete-btn {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Employee Data - CRUD Operations</h2>
+
+  <form id="employeeForm">
+    <input type="hidden" id="empId" />
+    <input type="text" id="name" placeholder="Employee Name" required />
+    <input type="number" id="age" placeholder="Age" min="18" max="70" required />
+    <input type="text" id="department" placeholder="Department" required />
+    <button type="submit">Add Employee</button>
+    <button type="button" id="cancelBtn" style="display:none;">Cancel Edit</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Age</th><th>Department</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="employeeTableBody">
+      <!-- Employee rows go here -->
+    </tbody>
+  </table>
+
+  <script>
+    let employees = [];
+    let editIndex = -1;
+
+    const empForm = document.getElementById('employeeForm');
+    const empIdInput = document.getElementById('empId');
+    const nameInput = document.getElementById('name');
+    const ageInput = document.getElementById('age');
+    const deptInput = document.getElementById('department');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const tbody = document.getElementById('employeeTableBody');
+
+    // Render table rows
+    function renderTable() {
+      tbody.innerHTML = '';
+      employees.forEach((emp, index) => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+          <td>${emp.id}</td>
+          <td>${emp.name}</td>
+          <td>${emp.age}</td>
+          <td>${emp.department}</td>
+          <td>
+            <button class="edit-btn" onclick="editEmployee(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteEmployee(${index})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Add or Update employee
+    empForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const age = parseInt(ageInput.value);
+      const department = deptInput.value.trim();
+
+      if (editIndex === -1) {
+        // Create new employee
+        const id = employees.length ? employees[employees.length - 1].id + 1 : 1;
+        employees.push({ id, name, age, department });
+      } else {
+        // Update existing employee
+        employees[editIndex].name = name;
+        employees[editIndex].age = age;
+        employees[editIndex].department = department;
+        editIndex = -1;
+        cancelBtn.style.display = 'none';
+        empForm.querySelector('button[type="submit"]').textContent = "Add Employee";
+      }
+
+      empForm.reset();
+      renderTable();
+    });
+
+    // Edit employee
+    function editEmployee(index) {
+      const emp = employees[index];
+      nameInput.value = emp.name;
+      ageInput.value = emp.age;
+      deptInput.value = emp.department;
+      editIndex = index;
+      cancelBtn.style.display = 'inline-block';
+      empForm.querySelector('button[type="submit"]').textContent = "Update Employee";
+    }
+
+    // Delete employee
+    function deleteEmployee(index) {
+      if (confirm("Are you sure you want to delete this employee?")) {
+        employees.splice(index, 1);
+        renderTable();
+        if (editIndex === index) {
+          empForm.reset();
+          editIndex = -1;
+          cancelBtn.style.display = 'none';
+          empForm.querySelector('button[type="submit"]').textContent = "Add Employee";
+        }
+      }
+    }
+
+    // Cancel edit
+    cancelBtn.addEventListener('click', () => {
+      empForm.reset();
+      editIndex = -1;
+      cancelBtn.style.display = 'none';
+      empForm.querySelector('button[type="submit"]').textContent = "Add Employee";
+    });
+
+    // Initial render
+    renderTable();
+  </script>
+
+</body>
+</html>
