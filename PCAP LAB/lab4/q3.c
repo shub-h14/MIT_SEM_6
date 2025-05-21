@@ -1,3 +1,15 @@
+// Write a MPI program to read 4 X 4 matrix and display the following output using four processes.
+// I/p matrix: 
+// 1 2 3 4
+// 1 2 3 1
+// 1 1 1 1
+// 2 1 2 1
+// O/p matrix: 
+// 1 2 3 4
+// 2 4 6 5 
+// 3 5 7 6
+// 5 6 9 7
+
 #include <stdio.h>
 #include <mpi.h>
 
