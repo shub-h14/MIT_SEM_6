@@ -1,3 +1,6 @@
+// 3. Write a program in MPI to stimulate simple calculator. perform each
+// operation using different process in parallel.
+
 #include <stdio.h>
 #include <mpi.h>
 #include <stdlib.h>
