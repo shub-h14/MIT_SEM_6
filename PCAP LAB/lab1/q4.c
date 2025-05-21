@@ -1,3 +1,6 @@
+//Write a program in mpi to toggle the character of a 
+//given string indexed by the rank of the process. 
+
 #include <stdio.h>
 #include <mpi.h>
 #include <string.h>
