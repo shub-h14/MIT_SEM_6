@@ -1,3 +1,11 @@
+// Write a MPI Program to read two strings S1 and S2 of same length in the root
+// process. Using N processes including the root (string length is evenly divisible
+// by N), produce the resultant string as shown below. Display the resultant string
+// in the root process. Use Collective communication routines.
+// Example:
+// String $1: string
+// String S2: length
+
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
