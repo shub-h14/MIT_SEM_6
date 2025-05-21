@@ -1,3 +1,6 @@
+//Write a MPI program where the master process (process 0) sends a number to each of
+//the slaves and the slave processes receive the number and prints it. Use standard send.
+
 #include <stdio.h>
 #include <mpi.h>
 
