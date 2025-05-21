@@ -1,3 +1,8 @@
+// 2. Write a MPI program to read an integer value M and NXM elements into an ID array in the root
+// process, where N is the number of processes. Root process sends M elements to each process. Each process
+// finds average of M elements it received and sends these average values to root. Root collects all
+// the values and finds the total average. Use collective communication routines.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
