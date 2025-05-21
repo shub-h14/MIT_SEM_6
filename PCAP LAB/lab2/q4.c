@@ -1,3 +1,8 @@
+//Write a MPI program to read an integer value in the root process. Root process sends
+//this value to Process1, Process1 sends this value to Process2 and so on. Last process
+//sends the value back to root process. When sending the value each process will first
+//increment the received value by one. Write the program using point to point communication routines.
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<mpi.h>
