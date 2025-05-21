@@ -1,3 +1,6 @@
+// Write a MPI program using N processes to find 1! +2! +.....+N!.
+// Use scan. Also, handle different errors using error handling routines.
+
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
