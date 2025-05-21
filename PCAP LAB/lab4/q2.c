@@ -1,3 +1,7 @@
+// Write a MPI program to read a 3 X 3 matrix. Enter an element to be
+// searched in the root process. Find the number of occurrences of this
+// element in the matrix using three processes.
+
 #include <stdio.h>
 #include <mpi.h>
 
