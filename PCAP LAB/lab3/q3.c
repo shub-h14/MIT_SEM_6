@@ -1,3 +1,7 @@
+// Write a MPI program to read a string. Using N processes (string length is evenly
+// divisible by N), find the number of non-vowels in the string. In the root process print
+// number of non- vowels found by each process and print the total number of non-vowels.
+
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
