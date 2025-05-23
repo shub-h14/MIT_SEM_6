@@ -1,2 +1,2 @@
 # MIT_SEM_6
-This is the labs which i attended in my 6th sem.
+This repository contains lab programs, assignments, and documentation for the 6th semester of my engineering curriculum. Each directory corresponds to a different subject or lab.
