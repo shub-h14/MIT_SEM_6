@@ -4,42 +4,52 @@
 #include "device_launch_parameters.h"
 #include<stdio.h>
 
-__global__ void add_vec(int*da,int*dc,int s){
-    int i=blockIdx.x*blockDim.x+threadIdx.x;
-    int k=0;
-    for(int j=0;j<s;j++){
-        if((da[j]<da[i])||(da[j]==da[i]&&j>i))
-            k++;
+__global__ void selection_sort_parallel(int* da, int* dc, int size) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    int position = 0;
+
+    // Count how many elements are smaller than da[i]
+    // or equal with a smaller index to maintain order for duplicates
+    for (int j = 0; j < size; j++) {
+        if ((da[j] < da[i]) || (da[j] == da[i] && j < i)) {
+            position++;
+        }
     }
-    dc[k]=da[i];
+
+    // Place element at its correct sorted position
+    dc[position] = da[i];
 }
 
-int main(){
+int main() {
     int n;
     printf("Length of the vector : ");
-    scanf("%d",&n);
+    scanf("%d", &n);
 
-    int a[n],c[n];
-    int *da,*dc;
+    int a[n], c[n];
+    int *da, *dc;
 
-    cudaMalloc((void **)&da,n*sizeof(int));
-    cudaMalloc((void **)&dc,n*sizeof(int));
+    cudaMalloc((void**)&da, n * sizeof(int));
+    cudaMalloc((void**)&dc, n * sizeof(int));
 
-    printf("Enter vector one : ");
-    for(int i=0;i<n;i++)
-        scanf("%d",&a[i]);
-    
-    cudaMemcpy(da,a,n*sizeof(int),cudaMemcpyHostToDevice);
+    printf("Enter vector elements : ");
+    for (int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
 
-    dim3 grid(n,1,1);
-    dim3 blk(1,1,1);
+    cudaMemcpy(da, a, n * sizeof(int), cudaMemcpyHostToDevice);
 
-    add_vec<<<grid,blk>>>(da,dc,n);
-    cudaMemcpy(c,dc,n*sizeof(int),cudaMemcpyDeviceToHost);
+    dim3 grid(n, 1, 1);
+    dim3 blk(1, 1, 1);
 
-    for(int i=0;i<n;i++)
-        printf("%d\t",c[i]);
+    selection_sort_parallel<<<grid, blk>>>(da, dc, n);
+    cudaMemcpy(c, dc, n * sizeof(int), cudaMemcpyDeviceToHost);
+
+    printf("Sorted vector : ");
+    for (int i = 0; i < n; i++)
+        printf("%d\t", c[i]);
     printf("\n");
+
     cudaFree(da);
     cudaFree(dc);
+
+    return 0;
 }
