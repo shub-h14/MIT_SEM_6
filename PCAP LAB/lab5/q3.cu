@@ -1,42 +1,53 @@
-//write a program in cuda to process a 1d array containg angles
-//in radians to generate sine of the angles in 
-//the output array.Use approariate functions.
+// CUDA program to process a 1D array containing angles in radians
+// and generate sine of the angles in the output array using sinf().
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
-#include<stdio.h>
+#include <stdio.h>
+#include <math.h> // for sinf()
 
-__global__ void add_vec(float*da,float*dc){
-    int index=blockIdx.x*blockDim.x+threadIdx.x;
-    dc[index]=sinf(da[index]);
+__global__ void compute_sine(float* da, float* dc, int n) {
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    if (index < n) {
+        dc[index] = sinf(da[index]);
+    }
 }
 
-int main(){
+int main() {
     int n;
-    printf("Length of the vector : ");
-    scanf("%d",&n);
+    printf("Length of the vector: ");
+    scanf("%d", &n);
 
-    float a[n],c[n];
-    float *da,*dc;
+    float* a = new float[n];
+    float* c = new float[n];
+    float* da, * dc;
 
-    cudaMalloc((void **)&da,n*sizeof(float));
-    cudaMalloc((void **)&dc,n*sizeof(float));
+    cudaMalloc((void**)&da, n * sizeof(float));
+    cudaMalloc((void**)&dc, n * sizeof(float));
 
-    printf("Enter vector one : ");
-    for(int i=0;i<n;i++)
-        scanf("%f",&a[i]);
-    
-    cudaMemcpy(da,a,n*sizeof(int),cudaMemcpyHostToDevice);
+    printf("Enter the angles in radians:\n");
+    for (int i = 0; i < n; i++)
+        scanf("%f", &a[i]);
 
-    dim3 grid(n,1,1);
-    dim3 blk(1,1,1);
+    cudaMemcpy(da, a, n * sizeof(float), cudaMemcpyHostToDevice);
 
-    add_vec<<<grid,blk>>>(da,dc);
-    cudaMemcpy(c,dc,n*sizeof(int),cudaMemcpyDeviceToHost);
+    int threadsPerBlock = 256;
+    int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 
-    for(int i=0;i<n;i++)
-        printf("%f\t",c[i]);
-    printf("\n");
+    dim3 grid(blocksPerGrid, 1, 1);
+    dim3 blk(threadsPerBlock, 1, 1);
+
+    compute_sine<<<grid, blk>>>(da, dc, n);
+    cudaMemcpy(c, dc, n * sizeof(float), cudaMemcpyDeviceToHost);
+
+    printf("Sine values:\n");
+    for (int i = 0; i < n; i++)
+        printf("sin(%f) = %f\n", a[i], c[i]);
+
     cudaFree(da);
     cudaFree(dc);
+    delete[] a;
+    delete[] c;
+
+    return 0;
 }
