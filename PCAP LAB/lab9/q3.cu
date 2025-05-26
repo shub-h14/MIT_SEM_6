@@ -1,3 +1,7 @@
+//Write a CUDA  program that reads a matrix A of size MxN and produce an output matix B
+//of same size such that it replaces all the non-border elements of A with its equivalent 1's
+//complement and remaining elements same as matrix A.
+
 #include "cuda_runtime.h"
 #include<stdio.h>
 #include<string.h>
