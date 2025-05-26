@@ -1,3 +1,7 @@
+//Write a program in CUDA to read MxN matrix A and replace 1st row of this matrix by
+//same elements, 2nd row element by square of each element and 3rd row element by 
+//cube of each element and so on.
+
 #include "cuda_runtime.h"
 #include<stdio.h>
 #include<string.h>
