@@ -1,3 +1,7 @@
+//Write a program in CUDA to perform parallel Sparse Matrix - Vector multiplication 
+//using compresssed sparse row (CSR) storage format. Represent the input sparse 
+//matrix in CSR format in the host code. 
+
 #include "cuda_runtime.h"
 #include<stdio.h>
 #include<string.h>
