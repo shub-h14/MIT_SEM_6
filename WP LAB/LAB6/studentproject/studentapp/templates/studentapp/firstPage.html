@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First Page</title>
+</head>
+<body>
+    <h2>Enter Student Details</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Roll Number:</label>
+        <input type="text" name="roll" required><br><br>
+
+        <label>Subject:</label>
+        <select name="subject" required>
+            {% for sub in subjects %}
+                <option value="{{ sub }}">{{ sub }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Go to Second Page</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Second Page</title>
+</head>
+<body>
+    <h2>Student Information</h2>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Roll:</strong> {{ roll }}</p>
+    <p><strong>Subject:</strong> {{ subject }}</p>
+
+    <form method="get" action="{% url 'first_page' %}">
+        <button type="submit">Back to First Page</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Car</title>
+</head>
+<body>
+    <h2>Select Car Manufacturer and Enter Model</h2>
+    <form method="POST" action="{% url 'details' %}">
+        {% csrf_token %}
+        <label for="manufacturer">Manufacturer:</label>
+        <select name="manufacturer" id="manufacturer">
+            {% for make in manufacturers %}
+                <option value="{{ make }}">{{ make }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
