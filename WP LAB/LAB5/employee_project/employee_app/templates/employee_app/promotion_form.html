@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Promotion Eligibility</title>
+</head>
+<body>
+    <h1>Check Promotion Eligibility</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.employee_id.label_tag }} {{ form.employee_id }}<br><br>
+        {{ form.date_of_joining.label_tag }} {{ form.date_of_joining }}<br><br>
+        <button type="submit">Am I Eligible for Promotion</button>
+    </form>
+
+    {% if message %}
+    <h2>Eligibility: {{ message }}</h2>
+    {% endif %}
+</body>
+</html>
